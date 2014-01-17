@@ -129,9 +129,11 @@ body {
 	}
 		#tweet-controls {
 			text-align: right;
+			display:none;
 		}
 			#tweet-controls div {
 				display: inline-block;
+				/*display: none */
 			}
 			#char-count {
 				font-size: 14px;
@@ -258,5 +260,7 @@ body {
 				top: 0;
 				left: 0;
 			}
+
+
 
 
