@@ -40,15 +40,18 @@ function updateCountdown() {
 
     if (remaining <= 10){
 		$('#char-count').css('color','red');
-		if (remaining <= 0) {
+		if (remaining < 0) {
 			//Disable Button
 			//$('#tweet-submit').css('background-color','gray');
-			$('#tweet-submit').hide();
+			//$('#tweet-submit').hide();
+			$('#tweet-submit').attr('disabled','disabled');
 		} else {
-			$('#tweet-submit').show();
+			//$('#tweet-submit').show();
+			$('#tweet-submit').removeAttr('disabled');
 		}
     } else {
     	$('#char-count').css('color','black');
+
     }
 
 }
