@@ -16,13 +16,6 @@ $(function(){
 
 	}); 
 
-	//Step 2
-	//$('textarea').click(function() {
-	//	$(this).css('height','5em');
-	//	$('#tweet-submit').css('visibility','visible');
-	//	$('#char-count').css('visibility','visible');
-	//});
-
 	//STEP 3: As the user types the character count should decrease. 
 	updateCountdown();
     $('textarea').change(updateCountdown);
@@ -36,9 +29,19 @@ $(function(){
     	console.log(name +" -> "+ text);
     	sendTweet(name, avatar, text);
 
-    	//Clear Text Area
+    	//Clear Text Area 
+       	//$('.tweet-compose').parent
+    	$('.tweet-compose').val("");
     });
 
+    //Step 6 Tweet COntent
+    $('.tweet-controls').hide();
+
+    $('.content').hover(function() {
+    	var that = $(this).children('div')[0];  //Select the corresponding Tweet Actions
+    	console.log(that);
+    	$(that).show(); 
+    });
 });
 
 function updateCountdown() {

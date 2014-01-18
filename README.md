@@ -1,5 +1,7 @@
 Use this repo as the starting point for the Twitter clone project:
 
+Clone from https://github.com/joalmay/twitter-clone to show Contributions
+
 ## PART ONE ##
 * Fork the repo
 * Get familiar with the html/css

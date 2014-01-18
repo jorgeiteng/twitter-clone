@@ -130,6 +130,7 @@ body {
 		#tweet-controls {
 			text-align: right;
 			display:none;
+
 		}
 			#tweet-controls div {
 				display: inline-block;
@@ -170,6 +171,7 @@ body {
 
 	.tweet-actions {
 		text-align: right;
+		display:none;
 	}
 		.tweet-actions ul {
 			list-style-type: none;
