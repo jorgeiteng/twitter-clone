@@ -62,6 +62,7 @@ function updateCountdown() {
     	$('#char-count').css('color','black');
 
     }
+    //Comment
 
 }
 
