@@ -11,8 +11,8 @@ $(function(){
 
 	$('textarea').on('blur',function() {
 	var that=$(this);
-	that.css('height', '2.5em');
-	$('#tweet-controls').hide();
+	//that.css('height', '2.5em');
+	//$('#tweet-controls').hide();
 
 	}); 
 
@@ -27,6 +27,14 @@ $(function(){
 	updateCountdown();
     $('textarea').change(updateCountdown);
     $('textarea').keyup(updateCountdown);
+
+    //Step 5 - Onclick Button
+    $('#tweet-submit').click(function() {
+    	var name=$('#name').html();
+    	var text= $('textarea').val();
+    	console.log(name +" -> "+ text);
+    	sendTweet(name,text);
+    });
 
 });
 
@@ -56,6 +64,19 @@ function updateCountdown() {
 
 }
 
+function sendTweet(name, text){
+	var tweet=document.createElement('div');
+	var avatar=document.createElement('img');
+	var username=document.createElement('span');
+	var tweet_text=document.createElement('p');
+	var tweet_actions=document.createElement('div');
+
+	$(tweet).addClass("tweet");
+	$(username).addClass("username").text(name).appendTo(tweet);
+	$(tweet_text).addClass("tweet-text").text(text).appendTo(tweet);
+	$(tweet_actions).addClass("tweet-actions").appendTo(tweet);
+	$('#stream').prepend(tweet);
+}
 
 /*
 $(function(){
