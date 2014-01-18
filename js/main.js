@@ -4,15 +4,15 @@ $(function(){
 	// Step 1
 	$('textarea').on('focus',function() {
 	var that=$(this);
-	that.css('height', that.height()*3);
+	that.css('height', '7em');
 	$('#tweet-controls').show();
 
 	});
 
-	$('textarea').on('blur',function() {
+	$('tweet-content').on('blur',function() {
 	var that=$(this);
-	//that.css('height', '2.5em');
-	//$('#tweet-controls').hide();
+	that.css('height', '2.5em');
+	$('#tweet-controls').hide();
 
 	}); 
 
@@ -35,6 +35,8 @@ $(function(){
     	var avatar= "img/alagoon.jpg";
     	console.log(name +" -> "+ text);
     	sendTweet(name, avatar, text);
+
+    	//Clear Text Area
     });
 
 });
@@ -48,23 +50,21 @@ function updateCountdown() {
     // Once it hits 10 character or less the count should turn red
 
     if (remaining <= 10){
-		$('#char-count').css('color','red');
-		if (remaining < 0) {
-			//Disable Button
-			//$('#tweet-submit').css('background-color','gray');
-			//$('#tweet-submit').hide();
-			$('#tweet-submit').attr('disabled','disabled');
-		} else {
-			//$('#tweet-submit').show();
-			$('#tweet-submit').removeAttr('disabled');
-		}
+    	$('#char-count').css('color','red');
     } else {
     	$('#char-count').css('color','black');
+    }
+
+	//Disable Button
+
+    if ((remaining < 0)||(remaining >= 140)) {
+			$('#tweet-submit').attr('disabled','disabled');
+		} else {
+			$('#tweet-submit').removeAttr('disabled');
+		}
 
     }
     //Comment
-
-}
 
 function sendTweet(name, avatar_src, text){
 	var tweet=document.createElement('div');
@@ -80,7 +80,7 @@ function sendTweet(name, avatar_src, text){
 				
 	$(avatar).addClass("avatar").attr('src',avatar_src).appendTo(profile_content);
 	$(full_name).text(name).appendTo(profile_content);
-	$(username).addClass("username").text(name).appendTo(profile_content);
+	$(username).addClass("username").text(" @"+name).appendTo(profile_content);
 
 	$(profile_content).appendTo(tweet);
 
