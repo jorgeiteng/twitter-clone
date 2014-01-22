@@ -34,14 +34,19 @@ $(function(){
     	$('.tweet-compose').val("");
     });
 
-    //Step 6 Tweet COntent
-    $('.tweet-controls').hide();
+    //Step 6 Tweet Content
+    //$('.tweet-controls').hide();
 
     $('.content').hover(function() {
     	var that = $(this).children('div')[0];  //Select the corresponding Tweet Actions
     	console.log(that);
     	$(that).show(); 
+    	},function(){
+    	// Not Hover
+    	var that = $(this).children('div')[0]; 
+    	$(that).hide(); 
     });
+
 });
 
 function updateCountdown() {
