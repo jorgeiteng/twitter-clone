@@ -39,12 +39,20 @@ $(function(){
 
     $('.content').hover(function() {
     	var that = $(this).children('div')[0];  //Select the corresponding Tweet Actions
-    	console.log(that);
+    	//console.log(that);
     	$(that).show(); 
     	},function(){
     	// Not Hover
     	var that = $(this).children('div')[0]; 
     	$(that).hide(); 
+    });
+
+    //Step 7 Hide Tweet Stats
+    $(".stats").hide();
+    $(".tweet").on("click", function() {
+    	var that = $(this).find('.stats');  //Select the corresponding Stats
+    	console.log(that);
+    	$(that).show(); 
     });
 
 });
