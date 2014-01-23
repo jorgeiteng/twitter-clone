@@ -6,14 +6,17 @@ $(document).ready(function(){
 		$('textarea').on('focus',function() {
 		var TwitterTextArea=$(this);
 		TwitterTextArea.css('height', '7em');
-		$('#tweet-controls').show();
+		
+		//Add Animation
+		//$('#tweet-controls').show();
+		$('#tweet-controls').slideDown();
 
 		});
 
 		$('tweet-content').on('blur',function() {
 		var TwitterTextArea=$(this);
 		TwitterTextArea.css('height', '2.5em');
-		$('#tweet-controls').hide();
+		$('#tweet-controls').slideUp();
 
 		}); 
 
@@ -41,11 +44,11 @@ $(document).ready(function(){
 	    $('.content').hover(function() {
 	    	var TwitterTweetContent = $(this).children('div')[0];  //Select the corresponding Tweet Actions
 	    	//console.log(TwitterTweetContent);
-	    	$(TwitterTweetContent).show(); 
+	    	$(TwitterTweetContent).slideDown();; 
 	    	},function(){
 	    	// Not Hover
 	    	var TwitterTweetContent = $(this).children('div')[0]; 
-	    	$(TwitterTweetContent).hide(); 
+	    	$(TwitterTweetContent).slideUp(); 
 	    });
 
 	    //Step 7 Hide Tweet Stats
@@ -53,7 +56,7 @@ $(document).ready(function(){
 	    $(".tweet").on("click", function() {
 	    	var TwitterTweetStats = $(this).find('.stats');  //Select the corresponding Stats
 	    	console.log(TwitterTweetStats);
-	    	$(TwitterTweetStats).show(); 
+	    	$(TwitterTweetStats).slideDown(); 
 	    });
 
 	});
