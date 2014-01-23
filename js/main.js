@@ -4,15 +4,15 @@ $(document).ready(function(){
 
 		// Step 1
 		$('textarea').on('focus',function() {
-		var that=$(this);
-		that.css('height', '7em');
+		var TwitterTextArea=$(this);
+		TwitterTextArea.css('height', '7em');
 		$('#tweet-controls').show();
 
 		});
 
 		$('tweet-content').on('blur',function() {
-		var that=$(this);
-		that.css('height', '2.5em');
+		var TwitterTextArea=$(this);
+		TwitterTextArea.css('height', '2.5em');
 		$('#tweet-controls').hide();
 
 		}); 
@@ -39,21 +39,21 @@ $(document).ready(function(){
 	    //$('.tweet-controls').hide();
 
 	    $('.content').hover(function() {
-	    	var that = $(this).children('div')[0];  //Select the corresponding Tweet Actions
-	    	//console.log(that);
-	    	$(that).show(); 
+	    	var TwitterTweetContent = $(this).children('div')[0];  //Select the corresponding Tweet Actions
+	    	//console.log(TwitterTweetContent);
+	    	$(TwitterTweetContent).show(); 
 	    	},function(){
 	    	// Not Hover
-	    	var that = $(this).children('div')[0]; 
-	    	$(that).hide(); 
+	    	var TwitterTweetContent = $(this).children('div')[0]; 
+	    	$(TwitterTweetContent).hide(); 
 	    });
 
 	    //Step 7 Hide Tweet Stats
 	    $(".stats").hide();
 	    $(".tweet").on("click", function() {
-	    	var that = $(this).find('.stats');  //Select the corresponding Stats
-	    	console.log(that);
-	    	$(that).show(); 
+	    	var TwitterTweetStats = $(this).find('.stats');  //Select the corresponding Stats
+	    	console.log(TwitterTweetStats);
+	    	$(TwitterTweetStats).show(); 
 	    });
 
 	});
