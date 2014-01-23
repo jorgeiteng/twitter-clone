@@ -1,112 +1,114 @@
+$(document).ready(function(){
 
-$(function(){
+	$(function(){
 
-	// Step 1
-	$('textarea').on('focus',function() {
-	var that=$(this);
-	that.css('height', '7em');
-	$('#tweet-controls').show();
+		// Step 1
+		$('textarea').on('focus',function() {
+		var that=$(this);
+		that.css('height', '7em');
+		$('#tweet-controls').show();
+
+		});
+
+		$('tweet-content').on('blur',function() {
+		var that=$(this);
+		that.css('height', '2.5em');
+		$('#tweet-controls').hide();
+
+		}); 
+
+		//STEP 3: As the user types the character count should decrease. 
+		updateCountdown();
+	    $('textarea').change(updateCountdown);
+	    $('textarea').keyup(updateCountdown);
+
+	    //Step 5 - Onclick Button
+	    $('#tweet-submit').click(function() {
+	    	var name=$('#name').html();
+	    	var text= $('textarea').val();
+	    	var avatar= "img/alagoon.jpg";
+	    	console.log(name +" -> "+ text);
+	    	sendTweet(name, avatar, text);
+
+	    	//Clear Text Area 
+	       	//$('.tweet-compose').parent
+	    	$('.tweet-compose').val("");
+	    });
+
+	    //Step 6 Tweet Content
+	    //$('.tweet-controls').hide();
+
+	    $('.content').hover(function() {
+	    	var that = $(this).children('div')[0];  //Select the corresponding Tweet Actions
+	    	//console.log(that);
+	    	$(that).show(); 
+	    	},function(){
+	    	// Not Hover
+	    	var that = $(this).children('div')[0]; 
+	    	$(that).hide(); 
+	    });
+
+	    //Step 7 Hide Tweet Stats
+	    $(".stats").hide();
+	    $(".tweet").on("click", function() {
+	    	var that = $(this).find('.stats');  //Select the corresponding Stats
+	    	console.log(that);
+	    	$(that).show(); 
+	    });
 
 	});
 
-	$('tweet-content').on('blur',function() {
-	var that=$(this);
-	that.css('height', '2.5em');
-	$('#tweet-controls').hide();
+	function updateCountdown() {
+	    // 140 is the max message length
+	    var remaining = 140 - $('textarea').val().length;
+	    console.log(remaining);
+	    $('#char-count').text(remaining);
 
-	}); 
+	    // Once it hits 10 character or less the count should turn red
 
-	//STEP 3: As the user types the character count should decrease. 
-	updateCountdown();
-    $('textarea').change(updateCountdown);
-    $('textarea').keyup(updateCountdown);
+	    if (remaining <= 10){
+	    	$('#char-count').css('color','red');
+	    } else {
+	    	$('#char-count').css('color','black');
+	    }
 
-    //Step 5 - Onclick Button
-    $('#tweet-submit').click(function() {
-    	var name=$('#name').html();
-    	var text= $('textarea').val();
-    	var avatar= "img/alagoon.jpg";
-    	console.log(name +" -> "+ text);
-    	sendTweet(name, avatar, text);
+		//Disable Button
 
-    	//Clear Text Area 
-       	//$('.tweet-compose').parent
-    	$('.tweet-compose').val("");
-    });
+	    if ((remaining < 0)||(remaining >= 140)) {
+				$('#tweet-submit').attr('disabled','disabled');
+			} else {
+				$('#tweet-submit').removeAttr('disabled');
+			}
 
-    //Step 6 Tweet Content
-    //$('.tweet-controls').hide();
+	    }
+	    //Comment
 
-    $('.content').hover(function() {
-    	var that = $(this).children('div')[0];  //Select the corresponding Tweet Actions
-    	//console.log(that);
-    	$(that).show(); 
-    	},function(){
-    	// Not Hover
-    	var that = $(this).children('div')[0]; 
-    	$(that).hide(); 
-    });
+	function sendTweet(name, avatar_src, text){
+		var tweet=document.createElement('div');
+		var profile_content=document.createElement('div');
+		var avatar=document.createElement('img');
+		var full_name=document.createElement('span');
+		var username=document.createElement('span');
+		var tweet_text=document.createElement('p');
+		var tweet_actions=document.createElement('div');
 
-    //Step 7 Hide Tweet Stats
-    $(".stats").hide();
-    $(".tweet").on("click", function() {
-    	var that = $(this).find('.stats');  //Select the corresponding Stats
-    	console.log(that);
-    	$(that).show(); 
-    });
+		$(tweet).addClass("tweet");
+		$(profile_content).addClass("content");
+					
+		$(avatar).addClass("avatar").attr('src',avatar_src).appendTo(profile_content);
+		$(full_name).text(name).appendTo(profile_content);
+		$(username).addClass("username").text(" @"+name).appendTo(profile_content);
+
+		$(profile_content).appendTo(tweet);
+
+		$(tweet_text).addClass("tweet-text").text(text).appendTo(tweet);
+		$(tweet_actions).addClass("tweet-actions").appendTo(tweet);
+
+		//Send to the Stream
+		$('#stream').prepend(tweet);
+	}
 
 });
-
-function updateCountdown() {
-    // 140 is the max message length
-    var remaining = 140 - $('textarea').val().length;
-    console.log(remaining);
-    $('#char-count').text(remaining);
-
-    // Once it hits 10 character or less the count should turn red
-
-    if (remaining <= 10){
-    	$('#char-count').css('color','red');
-    } else {
-    	$('#char-count').css('color','black');
-    }
-
-	//Disable Button
-
-    if ((remaining < 0)||(remaining >= 140)) {
-			$('#tweet-submit').attr('disabled','disabled');
-		} else {
-			$('#tweet-submit').removeAttr('disabled');
-		}
-
-    }
-    //Comment
-
-function sendTweet(name, avatar_src, text){
-	var tweet=document.createElement('div');
-	var profile_content=document.createElement('div');
-	var avatar=document.createElement('img');
-	var full_name=document.createElement('span');
-	var username=document.createElement('span');
-	var tweet_text=document.createElement('p');
-	var tweet_actions=document.createElement('div');
-
-	$(tweet).addClass("tweet");
-	$(profile_content).addClass("content");
-				
-	$(avatar).addClass("avatar").attr('src',avatar_src).appendTo(profile_content);
-	$(full_name).text(name).appendTo(profile_content);
-	$(username).addClass("username").text(" @"+name).appendTo(profile_content);
-
-	$(profile_content).appendTo(tweet);
-
-	$(tweet_text).addClass("tweet-text").text(text).appendTo(tweet);
-	$(tweet_actions).addClass("tweet-actions").appendTo(tweet);
-
-	//Send to the Stream
-	$('#stream').prepend(tweet);
-}
-
 /*
 $(function(){
 	$('textarea').click(function() {
